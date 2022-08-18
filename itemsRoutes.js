@@ -14,6 +14,7 @@ router.get("/", function (req, res) {
 
 /** POST /items: accepts JSON data and create a new item */
 router.post("/", function (req, res) {
+  // db.add(req.body)
   items.items.push(req.body);
 
   return res.
@@ -24,13 +25,13 @@ router.post("/", function (req, res) {
 
 /** GET /items/:name, returns the item of specified name*/
 router.get("/:name", function (req, res) {
-  let nameItem;
+  let nameItem = items.items.find(item => item.name === req.params.name);
 
-  for (let item of items.items) {
-    if (item.name === req.params.name) {
-      nameItem = item;
-    }
-  }
+  // for (let item of items.items) {
+  //   if (item.name === req.params.name) {
+  //     nameItem = item;
+  //   }
+  // }
 
   if (!nameItem) {
     throw new NotFoundError("No such item found!");
@@ -64,6 +65,7 @@ router.patch("/:name", function (req, res) {
 /** DELETE /items/[id]: delete user, return {message: Deleted} */
 router.delete("/:name", function (req, res) {
   let deleteItem;
+  
   for (let i = 0; i < items.items.length; i++) {
     if (items.items[i].name === req.params.name) {
       deleteItem = items.items[i];

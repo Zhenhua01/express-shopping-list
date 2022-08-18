@@ -28,13 +28,13 @@ describe("GET /items", function() {
 });
 // end
 
-/** GET /items/[name] - return data about one item: `{name: "popsicle", "price": 1.45}` */
+/** GET /items/[name] - return data about one item: `{name: "popsicle", price: 1.45}` */
 
 describe("GET /items/:name", function() {
   it("Gets a single item", async function() {
-    const resp = await request(app).get(`/item/${popsicle.name}`);
-
-    expect(resp.body).toEqual({name: "popsicle", "price": 1.45});
+    const resp = await request(app).get(`/items/${popsicle.name}`);
+    debugger;
+    expect(resp.body).toEqual({name: "popsicle", price: 1.45});
   });
 
   it("Responds with 404 if can't find item", async function() {
